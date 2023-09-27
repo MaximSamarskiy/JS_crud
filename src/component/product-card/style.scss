@@ -1,0 +1,21 @@
+@use '../../lib/service.scss' as s;
+
+.product-card{
+    border-radius: 10px;
+    border: 1px solid s.color(light);
+    padding: s.space(4);
+    display: flex;
+    flex-direction: column;
+     align-items: flex-start;
+     gap: s.space(3)
+}
+
+.product-card__title{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.product-card__subtitle{
+    font-size: 16px;
+    color: s.color(grey);
+}
