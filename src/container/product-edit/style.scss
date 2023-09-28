@@ -48,13 +48,29 @@
         padding: s.space(6);
     }
 
-    &__button{
+    
+
+    .button {
+       display: flex;
+      
+
+    }
+    
+    .button__left{
         border: 1px solid s.color('light');
         padding: s.space(2);
         border-radius: 10px;
         background-color:rgb(71, 71, 221);
-        color :white;
+       
     }
+    .button__right{
+        border: 1px solid s.color('light');
+        padding: s.space(2);
+        border-radius: 10px;
+        background-color:red;
+        margin-left: 30px;
+    }
+
 }
 main{
     display: flex;
@@ -69,3 +85,4 @@ main{
         padding-bottom: 5px;
     }
 }
+

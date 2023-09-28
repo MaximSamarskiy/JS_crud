@@ -37,12 +37,21 @@
   border: 1px solid #ddd;
   padding: 24px;
 }
-.product__button {
+.product .button {
+  display: flex;
+}
+.product .button__left {
   border: 1px solid #ddd;
   padding: 8px;
   border-radius: 10px;
   background-color: rgb(71, 71, 221);
-  color: white;
+}
+.product .button__right {
+  border: 1px solid #ddd;
+  padding: 8px;
+  border-radius: 10px;
+  background-color: red;
+  margin-left: 30px;
 }
 
 main {

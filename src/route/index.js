@@ -1,34 +1,34 @@
 // Підключаємо технологію express для back-end сервера
 const express = require('express')
+const { create } = require('hbs')
 // Cтворюємо роутер - місце, куди ми підключаємо ендпоїнти
 const router = express.Router()
 
 // ================================================================
 
-class User {
+class Product {
   static #list = []
 
-  constructor(email, login, password) {
-    this.email = email
-    this.login = login
-    this.password = password
+  constructor(name, price, description) {
+    this.name = name
+    this.price = price
+    this.description = description
     this.id = new Date().getTime()
   }
-
-  verifyPassword = (password) => this.password === password
-
-  static add = (user) => {
-    this.#list.push(user)
+  static add = (product) => {
+    this.#list.push(product)
   }
+
   static getList = () => this.#list
 
   static getById = (id) =>
-    this.#list.find((user) => user.id === id)
+    this.#list.find((product) => product.id === id)
 
   static deleteById = (id) => {
     const index = this.#list.findIndex(
-      (user) => user.id === id,
+      (product) => product.id === id,
     )
+
     if (index !== -1) {
       this.#list.splice(index, 1)
       return true
@@ -36,19 +36,14 @@ class User {
       return false
     }
   }
-  static updateById = (id, data) => {
-    const user = this.getById(id)
-    if (user) {
-      this.update(user, data)
-      return true
-    } else {
-      return false
-    }
-  }
 
-  static update = (user, { email }) => {
-    if (email) {
-      user.email = email
+  static updateById = (id, { name }) => {
+    const product = this.getById(id)
+
+    if (product) {
+      if (name) {
+        product.name = name
+      }
     }
   }
 }
@@ -61,74 +56,128 @@ class User {
 router.get('/', function (req, res) {
   // res.render генерує нам HTML сторінку
 
-  const list = User.getList()
-
   // ↙️ cюди вводимо назву файлу з сontainer
   res.render('index', {
     // вказуємо назву папки контейнера, в якій знаходяться наші стилі
     style: 'index',
-
-    data: {
-      users: {
-        list,
-        isEmpty: list.length === 0,
-      },
-    },
   })
   // ↑↑ сюди вводимо JSON дані
 })
 
 // ================================================================
+// router.get Створює нам один ентпоїнт
 
-router.post('/user-create', function (req, res) {
-  const { email, login, password } = req.body
+// ↙️ тут вводимо шлях (PATH) до сторінки
+router.get('/product-create', function (req, res) {
+  const list = Product.getList()
 
-  const user = new User(email, login, password)
+  res.render('product-create', {
+    style: 'product-create',
 
-  User.add(user)
-
-  console.log(User.getList())
-
-  res.render('success-info', {
-    style: 'success-info',
-    info: 'Користувач створенний',
+    data: {
+      products: {
+        list,
+        isEmpty: list.length === 0,
+      },
+    },
   })
 })
 
 // ================================================================
 
-router.get('/user-delete', function (req, res) {
+// router.get Створює нам один ентпоїнт
+
+// ↙️ тут вводимо шлях (PATH) до сторінки
+router.post('/product-create', function (req, res) {
+  const { name, price, description } = req.body
+
+  const product = new Product(name, price, description)
+
+  Product.add(product)
+
+  console.log(Product.getList())
+
+  res.render('alert', {
+    style: 'alert',
+
+    data: {
+      message: 'Успішне виконання дії',
+      info: 'Товар успішно був створений',
+      link: '/product-list',
+    },
+  })
+})
+
+// ================================================================
+
+router.get('/product-list', function (req, res) {
+  const list = Product.getList()
+  res.render('product-list', {
+    style: 'product-list',
+    data: {
+      title: 'Стильна сукня',
+      description: 'Елегантна сукня з натуральної тканини',
+      id: 12133423,
+      price: 900,
+      products: {
+        list,
+        isEmpty: list.length === 0,
+      },
+    },
+  })
+})
+
+// ================================================================
+
+router.post('/alert', function (req, res) {
+  console.log(req.body)
+
+  res.render('alert', {
+    style: 'alert',
+
+    data: {
+      message: 'Успішне виконання дії',
+      info: 'Товар успішно був видалений',
+      link: '/',
+    },
+  })
+})
+
+// ================================================================
+
+router.get('/product-edit', function (req, res) {
   const { id } = req.query
 
-  console.log(typeof id)
+  console.log(id)
 
-  User.deleteById(Number(id))
+  const product = Product.getById(Number(id))
 
-  res.render('success-info', {
-    style: 'success-info',
-    info: 'Користувач видаленний',
+  res.render('product-edit', {
+    style: 'product-edit',
+
+    data: {
+      message: 'Успішне виконання дії',
+      info: 'Товар успішно виконаний',
+      link: '/',
+    },
   })
 })
 
 // ================================================================
 
-router.post('/user-update', function (req, res) {
-  const { email, password, id } = req.body
+router.get('/product-delete', function (req, res) {
+  const { id } = req.query
 
-  let result = false
+  Product.deleteById(Number(id))
 
-  const user = User.getById(Number(id))
+  res.render('alert', {
+    style: 'alert',
 
-  if (user.verifyPassword(password)) {
-    User.update(user, { email })
-    result = true
-  }
-
-  res.render('success-info', {
-    style: 'success-info',
-    info: result
-      ? 'Email пошта оновлена'
-      : 'сталося помилка',
+    data: {
+      message: 'Успішне виконання дії',
+      info: 'Товар успішно був видалений',
+      link: '/',
+    },
   })
 })
 

@@ -1,48 +1,35 @@
-.product {
-  display: grid;
+.form {
+  display: flex;
+  flex-direction: column;
   padding: 16px;
   gap: 32px;
 }
-.product__title {
+.form__title {
   font-size: 20px;
   font-weight: bold;
+  border-bottom: 1px solid #ddd;
   padding-bottom: 4px;
 }
-.product__tabl {
-  display: flex;
-  gap: 40px;
-}
-.product__content {
-  display: flex;
-  flex-direction: column;
+.form__content {
+  display: grid;
   gap: 24px;
 }
-.product__field {
+.form__field {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
-.product .direct {
-  color: grey;
-  font-size: 12px;
-}
-.product__label {
+.form__label {
   font-size: 14px;
 }
-.product__input {
+.form__input {
   border: 1px solid #ddd;
   padding: 8px;
 }
-.product__inputs {
-  border: 1px solid #ddd;
-  padding: 24px;
-}
-.product__button {
+.form__button {
   border: 1px solid #ddd;
   padding: 8px;
-  border-radius: 10px;
-  background-color: rgb(71, 71, 221);
-  color: white;
+  border-radius: 20px;
 }
 
 main {
