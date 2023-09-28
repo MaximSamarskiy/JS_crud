@@ -18,4 +18,16 @@
 .product-card__subtitle{
     font-size: 16px;
     color: s.color(grey);
+
+}
+.price{
+    display: flex;
+    
+    
+}
+.price__right{
+    margin-left: 200px;
+}
+.product-card__button{
+    color:blue
 }

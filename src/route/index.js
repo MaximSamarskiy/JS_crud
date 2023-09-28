@@ -13,13 +13,38 @@ class Product {
     this.name = name
     this.price = price
     this.description = description
+    this.id = new Date().getTime()
   }
   static add = (product) => {
     this.#list.push(product)
   }
 
-  static getList = () => {
-    return this.#list
+  static getList = () => this.#list
+
+  static getById = (id) =>
+    this.#list.find((product) => product.id === id)
+
+  static deleteById = (id) => {
+    const index = this.#list.findIndex(
+      (product) => product.id === id,
+    )
+
+    if (index !== -1) {
+      this.#list.splice(index, 1)
+      return true
+    } else {
+      return false
+    }
+  }
+
+  static updateById = (id, { name }) => {
+    const product = this.getById(id)
+
+    if (product) {
+      if (name) {
+        product.name = name
+      }
+    }
   }
 }
 
@@ -85,16 +110,19 @@ router.post('/product-create', function (req, res) {
 
 // ================================================================
 
-router.post('/product-list', function (req, res) {
+router.get('/product-list', function (req, res) {
+  const list = Product.getList()
   res.render('product-list', {
     style: 'product-list',
-
     data: {
       title: 'Стильна сукня',
-      description: 'Елегантна сукня с натуральної тканини',
-      id: 12232,
+      description: 'Елегантна сукня з натуральної тканини',
+      id: 12133423,
       price: 900,
-      href: 'Редагувати',
+      products: {
+        list,
+        isEmpty: list.length === 0,
+      },
     },
   })
 })
@@ -103,6 +131,44 @@ router.post('/product-list', function (req, res) {
 
 router.post('/alert', function (req, res) {
   console.log(req.body)
+
+  res.render('alert', {
+    style: 'alert',
+
+    data: {
+      message: 'Успішне виконання дії',
+      info: 'Товар успішно був видалений',
+      link: '/',
+    },
+  })
+})
+
+// ================================================================
+
+router.get('/product-edit', function (req, res) {
+  const { id } = req.query
+
+  console.log(id)
+
+  const product = Product.getById(Number(id))
+
+  res.render('product-edit', {
+    style: 'product-edit',
+
+    data: {
+      message: 'Успішне виконання дії',
+      info: 'Товар успішно виконаний',
+      link: '/',
+    },
+  })
+})
+
+// ================================================================
+
+router.get('/product-delete', function (req, res) {
+  const { id } = req.query
+
+  Product.deleteById(Number(id))
 
   res.render('alert', {
     style: 'alert',

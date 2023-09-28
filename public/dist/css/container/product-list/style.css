@@ -17,6 +17,18 @@
   font-size: 16px;
 }
 
+.price {
+  display: flex;
+}
+
+.price__right {
+  margin-left: 200px;
+}
+
+.product-card__button {
+  color: blue;
+}
+
 .main {
   display: flex;
   flex-direction: column;
@@ -27,8 +39,8 @@
 .product-list {
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 40px;
 }
 
 /*# sourceMappingURL=style.css.map */
