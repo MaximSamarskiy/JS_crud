@@ -1,49 +1,63 @@
 <main class="main">
   {{#with data}}
-  <form method="POST" action="/purchase-submit?id={{id}}" class="form-card">
-    {{> heading title="Ваше замовлення"}}
+  <form method="POST" action="/purchase-info2" class="form-card">
+    {{> heading title="Інформація про замовлення"}}
 
-    <ul class="cart">
-      {{#each cart}}
-      <li class="cart__item">
-        <span>{{text}}</span>
-        <span>{{price}} грн</span>
-      </li>
-      {{/each}}
-    </ul>
+    <div class='purchase-item__block'>
+      <span class='title'>ID: 8723543324</span>
 
-    {{>divider}}
+    </div>
 
-    {{>heading title="Оформлення замовлення"}}
+    <div class="card1">
+      <div class='purchase-item__block'>
+        <span class='title'>Ім'я:</span>
+        <span class="text">Дмитро</span>
+      </div>
 
-    {{>field label ="Ім'я" name="firstname"}}
+      <div class='purchase-item__block'>
+        <span class='title'>Прізвище:</span>
+        <span class="text">Іванов</span>
+      </div>
 
-    {{>field label ="Прізвище" name="lastname"}}
+      <div class='purchase-item__block'>
+        <span class='title'>Телефон:</span>
+        <span class="text">+380987777777</span>
 
-    {{>field label ="Телефон" name="phone"}}
+      </div>
+      <div class='purchase-item__block'>
+        <span class='title'>Електронна пошта:</span>
+        <span class="text">d.ivanov@example.com</span>
+      </div>
+    </div>
 
-    {{>field label ="Пошта" name="email"}}
+    <div class="card2">
+      <div class='purchase-item__block'>
+        <span class='title'>Назва товару:</span>
+        <span class="text">Комп'ютер Artline Gaming (X43v31) AMD Ryzen 5 3600</span>
+      </div>
+      <div class='purchase-item__block'>
+        <span class='title'>Коментар:</span>
+        <span class="text">Подзвонити за 30 хв</span>
+      </div>
+    </div>
 
-    {{>field label ="Коментар" name="comment"}}
+    <div class="card3">
+      <div class='purchase-item__block'>
+        <span class='title'>Вартість товарів::</span>
+      </div>
+      <div class='purchase-item__block'>
+        <span class='title'>Вартість доставки:</span>
+      </div>
+      <div class='purchase-item__block'>
+        <span class='title'>Сума до сплати:</span>
+      </div>
+      <div class='purchase-item__block'>
+        <span class='title'>Нараховані бонуси:</span>
+      </div>
 
-    {{>field label ="Списати бонуси" name="bonus"}}
+    </div>
 
-    {{>field label ="Промо-код" name="promocode"}}
-
-    {{>divider}}
-
-    {{> field value=totalPrice name="totalPrice" disabled=true}}
-    {{> field value=productPrice name="productPrice" disabled=true}}
-    {{> field value=deliveryPrice name="deliveryPrice" disabled=true}}
-    {{> field value=amount name="amount" disabled=true}}
-
-    <strong class="form-card__total">
-      Всього: {{totalPrice}} грн ({{bonus}} грн бонусів)
-    </strong>
-
-    {{> button text="Оформити замовлення "}}
-
-
+    {{> button text="Змінити дані"}}
 
   </form>
   {{/with}}
