@@ -1,0 +1,36 @@
+@use '../../lib/service.scss' as s;
+
+@use '../../component/heading/style.scss' as heading;
+@use '../../component/divider/style.scss' as divider;
+
+
+.main{
+    display: flex;
+    flex-direction: column;
+    gap: s.space(5);
+    padding: s.space(5);
+}
+.card{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: s.space(20);
+    padding: s.space(10);
+    
+    border-radius: 10px;
+}
+
+.card{
+    display: flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: s.space(10);
+}
+.button{
+    display: flex;
+    justify-content: end;
+    padding: s.space(5);
+    
+}
+
