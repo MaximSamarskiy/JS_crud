@@ -448,11 +448,23 @@ router.get('/', function (req, res) {
 
 router.get('/purchase-list', function (req, res) {
   // res.render генерує нам HTML сторінку
-  // console.log(bonus)
 
-  const list = Purchase.getList()
-  console.log('purchase-list:', list)
-
+  const list = [
+    {
+      id: 2323545454,
+      img: 'https://picsum.photos/200/300',
+      product:
+        "Комп'ютер Artline Gaming (X43v31) AMD Ryzen 5 3600",
+      description:
+        'AMD Ryzen 5 3600 (3.6 - 4.2 ГГц) / RAM 16 ГБ / HDD 1 ТБ + SSD 480 ГБ / nVidia GeForce RTX 3050, 8 ГБ / без ОД / LAN / без ОС',
+      category: [
+        { id: 1, text: 'Готовий до відправки' },
+        { id: 2, text: 'Топ продажів' },
+      ],
+      totalPrice: 27000,
+      amount: 10,
+    },
+  ]
   // ↙️ cюди вводимо назву файлу з сontainer
   res.render('purchase-list', {
     // вказуємо назву папки контейнера, в якій знаходяться наші стилі
@@ -468,13 +480,29 @@ router.get('/purchase-list', function (req, res) {
 
 // ================================================================
 
-router.post('/purchase-info', function (req, res) {
+router.get('/purchase-info', function (req, res) {
   console.log(req.body)
   const id = Number(req.query.id)
 
+  // ↙️ cюди вводимо назву файлу з сontainer
   res.render('purchase-info', {
+    // вказуємо назву папки контейнера, в якій знаходяться наші стилі
     style: 'purchase-info',
+    data: {},
+    link: '/purchase-info2',
+  })
+})
 
+// ================================================================
+
+router.post('/purchase-info2', function (req, res) {
+  console.log(req.body)
+  const id = Number(req.query.id)
+
+  // ↙️ cюди вводимо назву файлу з сontainer
+  res.render('purchase-info2', {
+    // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+    style: 'purchase-info2',
     data: {},
   })
 })
