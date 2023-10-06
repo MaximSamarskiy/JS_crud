@@ -1,0 +1,17 @@
+@use '../../lib/service.scss' as s;
+
+@use '../../component/product-card/style.scss' as productCard;
+
+.main{
+display: flex;
+flex-direction: column;
+gap: s.space(10);
+padding: s.space(10);
+}
+
+.product-list{
+    width: 100%;
+    display: grid;
+    grid-template-columns:repeat(auto-fit, minmax(500px,1fr)) ;
+    gap:s.space(10);
+}
