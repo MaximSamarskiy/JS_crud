@@ -1,0 +1,41 @@
+<main class="main">
+  {{#with data}}
+  <div class="main__content">
+    <h1 class="title title--center">Моя бібліотека</h1>
+    <form method="POST" action="/spotify-search" class="search">
+
+      <a href="/spotify-search">
+        <img src="/svg/spotify-search.svg">
+      </a>
+      <a href="/spotify-choose">
+        <img src="/svg/add_button_big.svg">
+      </a>
+
+
+      <input type="search" class="search__input" placeholder="Введіть запит" name="value">
+
+    </form>
+
+    <div class="card">
+      <div class="img">
+        <img src="/svg/biblioteca.svg">
+        <img src="/svg/biblioteca2.svg">
+      </div>
+      <div class="img_title">
+        <h1 class="title title--center title--small">Пісні, що сподобались</h1>
+        <h1 class="title title--center title--small">Спільний альбом</h1>
+      </div>
+    </div>
+  </div>
+  {{/with}}
+</main>
+
+
+
+
+{{!
+Цей код містить лише те, що буде виводитись в
+
+<body>
+  Адже наш layout/default.hbs має вже структуру HTML
+  }}
